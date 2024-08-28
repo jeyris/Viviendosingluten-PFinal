@@ -187,7 +187,7 @@
 // Reemplaza 'YOUR_API_KEY' con tu clave de API de Pixabay
 const apiKey = '44139254-2c8f1e8f5d7b8b879615d2345';
 const query = 'healthy food';
-const url = `https://pixabay.com/api/?key=${apiKey}&q=${encodeURIComponent(query)}&image_type=photo&per_page=5`;
+const url = `https://pixabay.com/api/?key=${apiKey}&q=${encodeURIComponent(query)}&image_type=photo&per_page=6`;
 
 fetch(url)
 .then(response => response.json())
@@ -214,71 +214,120 @@ boton.onclick = function(){
     console.log('Hiciste click');
 };
 
-// Selección del formulario y elementos para mensajes
-const formulario1 = document.getElementById('formulario1');
-const errorMessageDiv = document.getElementById('error-message');
-const graciasMessageDiv = document.getElementById('gracias-message');
+// // Selección del formulario y elementos para mensajes
+// const formulario1 = document.getElementById('formulario1');
+// const errorMessageDiv = document.getElementById('error-message');
+// const graciasMessageDiv = document.getElementById('gracias-message');
 
-// Manejo del envío del formulario
-formulario1.addEventListener('submit', function(event){
+// // Manejo del envío del formulario
+// formulario1.addEventListener('submit', function(event){
+//     event.preventDefault();
+    
+//     let inputNombre = document.querySelector('input[name="nombre"]');
+//     let inputApellido = document.querySelector('input[name="apellido"]');
+//     let inputEmail = document.querySelector('input[name="email"]');
+//     let inputComentario = document.querySelector('textarea[name="comentario"]');
+//     let errores = [];
+    
+//     // Validaciones
+//     if (inputNombre.value === "") {
+//         errores.push('El campo nombre debe estar completo');
+//     } else if (inputNombre.value.length < 3) {
+//         errores.push('El campo nombre debe tener al menos 3 caracteres');
+//     }
+    
+//     if (inputApellido.value === "") {
+//         errores.push('El campo apellido debe estar completo');
+//     }
+    
+//     if (inputEmail.value === "" || !validateEmail(inputEmail.value)) {
+//         errores.push('El campo email debe ser un email válido');
+//     }
+
+//     if (inputComentario.value === "") {
+//         errores.push('El campo comentario debe estar completo');
+//     }
+
+//     // Mostrar errores si existen
+//     if (errores.length > 0) {
+//         console.log('Errores:', errores);
+//         errorMessageDiv.style.display = 'block';
+//         errorMessageDiv.innerHTML = 'Error: ' + errores.join(', ');
+//     } else {
+//         // Almacenar datos en LocalStorage
+//         let datos = {
+//             nombre: inputNombre.value,
+//             apellido: inputApellido.value,
+//             email: inputEmail.value,
+//             comentario: inputComentario.value
+//         };
+
+//         // Obtener datos actuales del LocalStorage y agregar los nuevos
+//         let storedData = JSON.parse(localStorage.getItem('datos')) || [];
+//         storedData.push(datos);
+//         localStorage.setItem('datos', JSON.stringify(storedData));
+
+//         console.log('Datos almacenados en el Local Storage:', JSON.parse(localStorage.getItem('datos')));
+
+//         // Mostrar mensaje de agradecimiento
+//         errorMessageDiv.style.display = 'none';
+//         formulario1.reset();
+//         graciasMessageDiv.innerHTML = `Gracias por enviar tus datos! <br> Nombre: ${datos.nombre} <br> Apellido: ${datos.apellido} <br> Email: ${datos.email} <br> Comentario: ${datos.comentario}`;
+//         graciasMessageDiv.style.display = 'block';
+//     }
+// });
+
+// // Función para validar el formato del email
+// function validateEmail(email) {
+//     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//     return re.test(String(email).toLowerCase());
+// }
+
+// let boton = document.querySelector (".boton");
+//     boton.onclick = function(){
+//     console.log ('Hiciste click')
+//     }
+
+
+    const formulario1 = document.getElementById('formulario1');
+    const errorMessageDiv = document.getElementById('error-message');
+    const graciasMessageDiv = document.getElementById('gracias-message');
+
+    formulario1.addEventListener('submit', function(event){
     event.preventDefault();
     
     let inputNombre = document.querySelector('input[name="nombre"]');
     let inputApellido = document.querySelector('input[name="apellido"]');
-    let inputEmail = document.querySelector('input[name="email"]');
-    let inputComentario = document.querySelector('textarea[name="comentario"]');
     let errores = [];
     
-    // Validaciones
     if (inputNombre.value === "") {
-        errores.push('El campo nombre debe estar completo');
+        errores.push('El campo nombre debe estar completo')
     } else if (inputNombre.value.length < 3) {
-        errores.push('El campo nombre debe tener al menos 3 caracteres');
+        errores.push('El campo debe tener al menos 3 caracteres')
     }
     
-    if (inputApellido.value === "") {
-        errores.push('El campo apellido debe estar completo');
-    }
-    
-    if (inputEmail.value === "" || !validateEmail(inputEmail.value)) {
-        errores.push('El campo email debe ser un email válido');
-    }
-
-    if (inputComentario.value === "") {
-        errores.push('El campo comentario debe estar completo');
-    }
-
-    // Mostrar errores si existen
     if (errores.length > 0) {
         console.log('Errores:', errores);
+        
         errorMessageDiv.style.display = 'block';
         errorMessageDiv.innerHTML = 'Error: ' + errores.join(', ');
     } else {
-        // Almacenar datos en LocalStorage
+
         let datos = {
-            nombre: inputNombre.value,
-            apellido: inputApellido.value,
-            email: inputEmail.value,
-            comentario: inputComentario.value
+        nombre: inputNombre.value,
+        apellido: inputApellido.value
         };
-
-        // Obtener datos actuales del LocalStorage y agregar los nuevos
-        let storedData = JSON.parse(localStorage.getItem('datos')) || [];
-        storedData.push(datos);
-        localStorage.setItem('datos', JSON.stringify(storedData));
-
+        
+        
+        localStorage.setItem('datos', JSON.stringify(datos));
         console.log('Datos almacenados en el Local Storage:', JSON.parse(localStorage.getItem('datos')));
-
-        // Mostrar mensaje de agradecimiento
+        
+        
         errorMessageDiv.style.display = 'none';
         formulario1.reset();
-        graciasMessageDiv.innerHTML = `Gracias por enviar tus datos! <br> Nombre: ${datos.nombre} <br> Apellido: ${datos.apellido} <br> Email: ${datos.email} <br> Comentario: ${datos.comentario}`;
-        graciasMessageDiv.style.display = 'block';
+
+        graciasMessageDiv.innerHTML = `Gracias por enviar tus datos! <br> Nombre: ${datos.nombre} <br> Apellido: ${datos.apellido}`;
+        graciasMessageDiv.classList.add('show');
+        
     }
 });
-
-// Función para validar el formato del email
-function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(String(email).toLowerCase());
-}
